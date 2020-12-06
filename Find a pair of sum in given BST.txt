@@ -1,0 +1,50 @@
+def isPairPresent(root, target):
+    it1, it2 = [], []
+ 
+    # Initializing forward iterator
+    c = root
+    while (c != None):
+        it1.append(c)
+        c = c.left
+ 
+    # Initializing backward iterator
+    c = root
+    while (c != None):
+        it2.append(c)
+        c = c.right
+ 
+    # Two pointer technique
+    while (it1[-1] != it2[-1]):
+ 
+        # To store the value of the nodes
+        # current iterators are pointing to
+        v1 = it1[-1].data
+        v2 = it2[-1].data
+ 
+        # Base case 
+        if (v1 + v2 == target):
+            return 1
+ 
+        # Moving forward iterator
+        if (v1 + v2 < target):
+            c = it1[-1].right
+            del it1[-1]
+             
+            while (c != None):
+                it1.append(c)
+                c = c.left
+ 
+        # Moving backward iterator
+        else:
+            c = it2[-1].left
+            del it2[-1]
+             
+            while (c != None):
+                it2.append(c)
+                c = c.right
+ 
+    # If no such pair found
+    return 0
+    
+
+
